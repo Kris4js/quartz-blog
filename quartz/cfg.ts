@@ -83,6 +83,31 @@ export interface GlobalConfiguration {
    * Region Codes: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
    */
   locale: ValidLocale
+  /**
+   * AI Summary configuration for generating document summaries
+   */
+  aiSummary?: {
+    enabled: boolean
+    provider: "openai" | "anthropic" | "custom"
+    apiKeyEnvVar: string
+    baseUrl?: string
+    model: string
+    promptTemplate: string
+    maxTokens: number
+    cache: {
+      type: "file" | "redis"
+      path?: string
+      redis?: {
+        host: string
+        port: number
+        password?: string
+        db?: number
+      }
+    }
+    showInUI: boolean
+    collapsible: boolean
+    defaultCollapsed: boolean
+  }
 }
 
 export interface QuartzConfig {

@@ -17,7 +17,11 @@
     "check": "tsc --noEmit && npx prettier . --check",
     "format": "npx prettier . --write",
     "test": "tsx --test",
-    "profile": "0x -D prof ./quartz/bootstrap-cli.mjs build --concurrency=1"
+    "profile": "0x -D prof ./quartz/bootstrap-cli.mjs build --concurrency=1",
+    "publish": "./publish.sh",
+    "publish:auto": "node publish.mjs --auto",
+    "publish:dry": "node publish.mjs --dry-run --auto",
+    "quick-publish": "./quick-publish.sh"
   },
   "engines": {
     "npm": ">=10.9.2",

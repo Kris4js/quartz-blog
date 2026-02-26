@@ -1,5 +1,23 @@
 import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
+import { readFileSync, existsSync } from "fs"
+import { resolve } from "path"
+
+// Load .env file
+const envPath = resolve(process.cwd(), ".env")
+if (existsSync(envPath)) {
+  const envContent = readFileSync(envPath, "utf-8")
+  envContent.split("\n").forEach((line) => {
+    const trimmed = line.trim()
+    if (trimmed && !trimmed.startsWith("#")) {
+      const [key, ...valueParts] = trimmed.split("=")
+      if (key && valueParts.length > 0) {
+        const value = valueParts.join("=").trim()
+        process.env[key.trim()] = value
+      }
+    }
+  })
+}
 
 /**
  * Quartz 4 Configuration
@@ -52,6 +70,22 @@ const config: QuartzConfig = {
         },
       },
     },
+    aiSummary: {
+      enabled: process.env.ENABLE_AI_SUMMARY === "true",
+      provider: "openai", // OpenRouter is compatible with OpenAI API
+      apiKeyEnvVar: "OPENAI_API_KEY",
+      baseUrl: process.env.OPENAI_API_BASE || "https://openrouter.ai/api/v1",
+      model: "deepseek/deepseek-v3.2",
+      promptTemplate: "请用2-3句话总结这篇文档的核心内容：\n\n{content}",
+      maxTokens: 150,
+      cache: {
+        type: "file",
+        path: ".quartz/cache/ai-summaries.json",
+      },
+      showInUI: true,
+      collapsible: true,
+      defaultCollapsed: false,
+    },
   },
   plugins: {
     transformers: [
@@ -72,6 +106,22 @@ const config: QuartzConfig = {
       Plugin.CrawlLinks({ markdownLinkResolution: "shortest" }),
       Plugin.Description(),
       Plugin.Latex({ renderEngine: "katex" }),
+      Plugin.AISummary({
+        enabled: process.env.ENABLE_AI_SUMMARY === "true",
+        provider: "openai",
+        apiKeyEnvVar: "OPENAI_API_KEY",
+        baseUrl: process.env.OPENAI_API_BASE || "https://openrouter.ai/api/v1",
+        model: "deepseek/deepseek-v3.2",
+        promptTemplate: "请用2-3句话总结这篇文档的核心内容：\n\n{content}",
+        maxTokens: 150,
+        cache: {
+          type: "file",
+          path: ".quartz/cache/ai-summaries.json",
+        },
+        showInUI: true,
+        collapsible: true,
+        defaultCollapsed: false,
+      }),
     ],
     filters: [Plugin.RemoveDrafts()],
     emitters: [
