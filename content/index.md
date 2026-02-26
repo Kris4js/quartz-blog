@@ -8,4 +8,4 @@ Hello👋，我是 Kris4js！东北某211本科软件工程，现在在一家小
 
 
 
-文章采用 `Typora` 编写，通过 `Github workflow` 发布，项目地址是 https://github.com/Mudrock51/quartz-blog/tree/v4。
+文章采用 `Typora` 编写，通过 `Github workflow` 发布，项目地址是 https://github.com/Kris4js/quartz-blog/tree/v4。
