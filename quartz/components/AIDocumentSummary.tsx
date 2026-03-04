@@ -17,8 +17,7 @@ const AIDocumentSummary: QuartzComponent = ({
     <div class={classNames(displayClass, "ai-summary-container")}>
       <details class="ai-summary" {...(collapsible && defaultCollapsed ? {} : { open: true })}>
         <summary class="ai-summary-header">
-          <span class="ai-summary-icon">✨</span>
-          <span class="ai-summary-label">AI 文档总结</span>
+          <span class="ai-summary-label">TL;DR</span>
         </summary>
         <div class="ai-summary-content">{aiSummary}</div>
       </details>
@@ -28,14 +27,21 @@ const AIDocumentSummary: QuartzComponent = ({
 
 AIDocumentSummary.css = `
 .ai-summary-container {
-  margin: 1rem 0;
+  margin: 1.5rem 0;
 }
 
 .ai-summary {
-  background: var(--highlight);
-  border-left: 3px solid var(--secondary);
-  border-radius: 4px;
-  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, var(--highlight) 0%, color-mix(in srgb, var(--highlight) 80%, var(--secondary) 20%) 100%);
+  border: 1px solid color-mix(in srgb, var(--secondary) 40%, transparent);
+  border-radius: 8px;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.2s ease;
+}
+
+.ai-summary:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .ai-summary-header {
@@ -43,32 +49,34 @@ AIDocumentSummary.css = `
   list-style: none;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-weight: 500;
-  color: var(--darkgray);
+  padding: 0.6rem 1rem;
+  user-select: none;
 }
 
 .ai-summary-header::-webkit-details-marker {
   display: none;
 }
 
-.ai-summary-icon {
-  font-size: 1.2em;
-}
-
 .ai-summary-label {
-  font-size: 0.9em;
+  font-size: 0.75em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--secondary);
+  background: color-mix(in srgb, var(--secondary) 12%, transparent);
+  padding: 0.2em 0.6em;
+  border-radius: 4px;
 }
 
 .ai-summary[open] .ai-summary-header {
-  margin-bottom: 0.5rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--secondary) 20%, transparent);
 }
 
 .ai-summary-content {
   color: var(--dark);
-  font-size: 0.95em;
-  line-height: 1.6;
-  padding-left: 0.5rem;
+  font-size: 0.93em;
+  line-height: 1.65;
+  padding: 0.75rem 1rem;
 }
 `
 
