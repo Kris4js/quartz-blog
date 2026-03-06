@@ -3,6 +3,8 @@ import * as Plugin from "./quartz/plugins"
 import { readFileSync, existsSync } from "fs"
 import { resolve } from "path"
 
+const HOME_HERO_IMAGE = "/static/home-hero-placeholder.svg"
+
 // Load .env file
 const envPath = resolve(process.cwd(), ".env")
 if (existsSync(envPath)) {
