@@ -100,11 +100,16 @@ button.desktop-explorer {
   color: var(--dark);
   display: flex;
   align-items: center;
+  min-width: 0;
 
   & h2 {
     font-size: 1rem;
     display: inline-block;
     margin: 0;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 
@@ -129,6 +134,12 @@ button.desktop-explorer {
         opacity: 1;
         color: var(--tertiary);
       }
+
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      min-width: 0;
     }
   }
 
@@ -167,6 +178,10 @@ button.desktop-explorer {
     font-weight: $semiBoldWeight;
     line-height: 1.5rem;
     display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   & div > a:hover {
@@ -184,6 +199,8 @@ button.desktop-explorer {
     display: flex;
     align-items: center;
     font-family: var(--headerFont);
+    min-width: 0;
+    max-width: 100%;
 
     & span {
       font-size: 0.95rem;
@@ -193,6 +210,10 @@ button.desktop-explorer {
       margin: 0;
       line-height: 1.5rem;
       pointer-events: none;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 100%;
     }
   }
 }
